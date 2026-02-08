@@ -1,10 +1,10 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Miguel Angel Pérez Solano
+// Miguel Angel PÃ©rez Solano
 // Instituto Tecnologico de Oaxaca
-// Departamento de Ingeniería Electrónica y Electrónica
+// Departamento de IngenierÃ­a ElectrÃ³nica y ElectrÃ³nica
 // Design Name: Circuitos Secuenciales
-// Module Name: clk10kHz
+// Module Name: clk1_5Hz
 
 
 module clk1_5Hz (
