@@ -12,12 +12,12 @@ module Gray_Counter4bits_tb;
  always #10 clk = ~clk;
     
     initial begin
-        // Inicialización de señales
+        // InicializaciÃ³n de seÃ±ales
         clk = 1'b0;   rst = 1'b1; #50
 
-        // Estímulos
+        // EstÃ­mulos
         rst = 1'b0; #500; // Esperar 500 ns
-        // Aquí agregar estímulos adicionales
+        // AquÃ­ agregar estÃ­mulos adicionales
         rst = 1'b1; #500;
         $finish;
     end
