@@ -3,7 +3,7 @@ module fsm_GrayCounter4bits (
     input reset,
     output reg [3:0] GrayCount
 );
-    // Codificaci髇 del estado
+    // Codificaci贸n del estado
     parameter S0 = 4'b0000;
     parameter S1 = 4'b0001;
     parameter S2 = 4'b0011;
@@ -30,7 +30,7 @@ module fsm_GrayCounter4bits (
         else state <= next_state;
     end
 
-    // L骻ica combinacioal: L骻ica del siguiente estado
+    // L贸gica combinacioal: L贸gica del siguiente estado
     always @(*) begin
         case (state)
             S0: next_state = S1;
@@ -53,7 +53,7 @@ module fsm_GrayCounter4bits (
         endcase
     end
 
-    // L骻ica de salida: (Moore: Logica basada unicamente en el estado actual)
+    // L贸gica de salida: (Moore: Logica basada unicamente en el estado actual)
     always @(*) begin
         case (state)
             S0: GrayCount = 4'b0000;
