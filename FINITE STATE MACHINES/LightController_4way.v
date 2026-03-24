@@ -1,6 +1,9 @@
+//Instituto Tecnológico de Oaxaca
+//Materia: Programación estructurada
+//Autor: Miguel Angel Pérez Solano
+//Departamento de Ingeniería Eléctrica y Electronica
+
 `timescale 1ns / 1ps
-
-
 module LightController_4way(
 
 input clk,
