@@ -1,4 +1,8 @@
-`timescale 1ns / 1ps
+// Miguel Angel Pérez Solano
+// Instituto Tecnologico de Oaxaca
+// Departamento de Ingeniería Electrónica y Electrónica
+// Design Name: Circuitos Secuenciales
+// Module Name: Contador Mod_100
 
 module counterMod100(
 	input reset,
