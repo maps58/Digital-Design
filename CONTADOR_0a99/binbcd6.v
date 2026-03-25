@@ -1,4 +1,8 @@
-`timescale 1ns / 1ps
+// Miguel Angel Pérez Solano
+// Instituto Tecnologico de Oaxaca
+// Departamento de Ingeniería Electrónica y Electrónica
+// Design Name: Circuitos Secuenciales
+// Module Name: Convertidor binario_bcd
 
  module bin2bcd(
     input wire [6:0] b,
