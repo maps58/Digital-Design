@@ -1,4 +1,8 @@
-`timescale 1ns / 1ps
+// Miguel Angel Pérez Solano
+// Instituto Tecnologico de Oaxaca
+// Departamento de Ingeniería Electrónica y Electrónica
+// Design Name: Circuitos Secuenciales
+// Module Name: Decodificador BCD_7seg
 
 module x7seg(
     input wire [7:0] x,
@@ -15,7 +19,7 @@ module x7seg(
     
     assign dp = 1;  
     
-    //configurar aen[7:0] �ra blankear digitos
+    //configurar aen[7:0] ára blankear digitos
     
     assign aen[1]= x[7]|x[6]|x[5]|x[4];
     assign aen[0]=1;
