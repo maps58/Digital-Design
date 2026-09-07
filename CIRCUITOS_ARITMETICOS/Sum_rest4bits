@@ -1,0 +1,35 @@
+
+
+//Modelo estructural para un sumador/restador de 4 bits
+module PR3_4(
+input [3:0] a, b,
+input m,
+output [3:0] rslt, cout);
+//output cout);
+//output ovfl);
+
+wire net0, net1, net2, net3;
+//define overflow
+//xor (ovfl, cout[3], cout[2]);
+
+xor (net0, b[0], m);
+xor (net1, b[1], m);
+xor (net2, b[2], m);
+xor (net3, b[3], m);
+
+//Instanciacion de los 8 full Adders
+FA inst0 (.a(a[0]),.b(net0),.cin(m),.sum(rslt[0]),.cout(cout[0]));
+FA inst1 (.a(a[1]),.b(net1),.cin(cout[0]),.sum(rslt[1]),.cout(cout[1]));
+FA inst2 (.a(a[2]),.b(net2),.cin(cout[1]),.sum(rslt[2]),.cout(cout[2]));
+FA inst3 (.a(a[3]),.b(net3),.cin(cout[2]),.sum(rslt[3]),.cout(cout[3]));
+endmodule
+
+//Modelado del full Adder por dataflow
+module FA (a, b, cin, sum, cout);
+input a, b, cin;
+output sum, cout;
+
+assign sum = (a ^ b) ^ cin;
+assign cout = cin & (a ^ b) | (a & b);
+endmodule
+
