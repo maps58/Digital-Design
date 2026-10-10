@@ -1,0 +1,30 @@
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_unsigned.ALL;    
+
+entity PR8_2 is
+    Port (
+        clk: in STD_LOGIC;
+        reset: in STD_LOGIC;
+        out1Hz : inout STD_LOGIC
+    );
+end PR8_2; 
+architecture clk1Hz of PR8_2 is
+      signal contador: std_logic_vector (25 downto 0);
+begin
+    divisor_frecuencia: process (reset,clk) 
+begin
+        if (reset = '1') then
+            out1Hz <= '0';
+            contador <= (others => '0');
+        elsif rising_edge(clk) then
+            if (contador = x"2FAF07F")then    --Para un clock de 1Hz
+               contador <= (others => '0');
+                out1Hz <= NOT out1Hz;                
+            else
+                contador <= contador+1;
+            end if;
+        end if;
+    end process;
+end clk1Hz;
