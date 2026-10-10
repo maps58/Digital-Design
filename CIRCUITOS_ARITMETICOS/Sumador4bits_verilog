@@ -1,3 +1,6 @@
+// Este es el código fuente de un restador de 4 bits
+// Com código en modelado estructural
+
 `timescale 1ns / 1ps
 
 //Sumador de 4-bits con el full_adder Instanciado
@@ -30,5 +33,42 @@ always @(*)
 begin
     sum = a ^ b ^ cin;
     cout = (a & b) | (a & cin) | (b & cin);
+end
+endmodule
+
+*****************************************************************************************************************************************************
+//Este es el testbench del código anterior
+`timescale 1ns / 1ps
+//Testbench del sumador de 4-bits con propagación de acarreo
+module TB_PR3_2;
+reg [3:0]a, b;
+reg Cin;
+wire [3:0] sum;
+wire Cout;
+
+//instanciar el modulo dentro del testbench.
+PR3_2 uut (.a(a), .b(b),.Cin(Cin),.sum(sum),.Cout(Cout)
+);
+//desplegar variables
+
+initial
+$monitor ("a=%b, b=%b, Cin=%b, Cout=%b, sum=%b",a, b, Cin, Cout, sum);
+initial
+begin
+#0 a = 4'b1111; b = 4'b0000; Cin = 1'b0;
+#10 a = 4'b1111; b = 4'b0001; Cin = 1'b0;
+#10 a = 4'b0011; b = 4'b0111; Cin = 1'b0;
+#10 a = 4'b0101; b = 4'b0101; Cin = 1'b0;
+#10 a = 4'b1001; b = 4'b1001; Cin = 1'b0;
+#10 a = 4'b1110; b = 4'b0001; Cin = 1'b0;
+#10 a = 4'b1101; b = 4'b1101; Cin = 1'b0;
+#10 a = 4'b1111; b = 4'b1111; Cin = 1'b0;
+#10 a = 4'b1111; b = 4'b1111; Cin = 1'b0;
+#10 a = 4'b1110; b = 4'b0001; Cin = 1'b1;
+#10 a = 4'b1101; b = 4'b1101; Cin = 1'b1;
+#10 a = 4'b1110; b = 4'b1111; Cin = 1'b1;
+#10 a = 4'b1111; b = 4'b1111; Cin = 1'b1;
+#10
+ $stop;
 end
 endmodule
