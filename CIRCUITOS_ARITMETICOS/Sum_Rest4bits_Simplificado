@@ -1,0 +1,58 @@
+`timescale 1ns / 1ps
+
+module SUM_REST2_4bits(
+    input  [3:0] a,          // Entrada A de 4 bits
+    input  [3:0] b,          // Entrada B de 4 bits
+    input  sel,        // Control: 0 = Suma, 1 = Resta
+    output [3:0] dout,       // Resultado de 4 bits
+    output       carry_borrow // Acarreo o préstamo de salida
+);
+
+    wire [4:0] resultado;
+    
+    assign resultado = (sel == 1'b1) ? (a - b) : (a + b);
+        
+    // Asignamos el resultado de 4 bits
+    assign dout = resultado[3:0];
+    
+    // El bit 5 (índice 4) representa el acarreo (cout) o préstamo (borrow)
+    assign carry_barrow = resultado[4];
+
+endmodule
+
+*********************TESTBENCH DEL CODIGO ANTERIOR****************************************************
+
+`timescale 1ns / 1ps
+//Testbench del sumador de 4-bits con propagación de acarreo
+module TB_PR3_2;
+reg [3:0]a, b;
+reg Cin;
+wire [3:0] sum;
+wire Cout;
+
+//instanciar el modulo dentro del testbench.
+PR3_2 uut (.a(a), .b(b),.Cin(Cin),.sum(sum),.Cout(Cout)
+);
+//desplegar variables
+
+initial
+$monitor ("a=%b, b=%b, Cin=%b, Cout=%b, sum=%b",a, b, Cin, Cout, sum);
+initial
+begin
+#0 a = 4'b1111; b = 4'b0000; Cin = 1'b0;
+#10 a = 4'b1111; b = 4'b0001; Cin = 1'b0;
+#10 a = 4'b0011; b = 4'b0111; Cin = 1'b0;
+#10 a = 4'b0101; b = 4'b0101; Cin = 1'b0;
+#10 a = 4'b1001; b = 4'b1001; Cin = 1'b0;
+#10 a = 4'b1110; b = 4'b0001; Cin = 1'b0;
+#10 a = 4'b1101; b = 4'b1101; Cin = 1'b0;
+#10 a = 4'b1111; b = 4'b1111; Cin = 1'b0;
+#10 a = 4'b1111; b = 4'b1111; Cin = 1'b0;
+#10 a = 4'b1110; b = 4'b0001; Cin = 1'b1;
+#10 a = 4'b1101; b = 4'b1101; Cin = 1'b1;
+#10 a = 4'b1110; b = 4'b1111; Cin = 1'b1;
+#10 a = 4'b1111; b = 4'b1111; Cin = 1'b1;
+#10
+ $stop;
+end
+endmodule
