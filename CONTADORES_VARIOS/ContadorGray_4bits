@@ -1,0 +1,171 @@
+
+
+**************************ARCHIVO FUENTE DEL clk1Hz************************************************************
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_unsigned.ALL;    
+
+entity PR8_2 is
+    Port (
+        clk: in STD_LOGIC;
+        reset: in STD_LOGIC;
+        out1Hz : inout STD_LOGIC
+    );
+end PR8_2; 
+architecture clk1Hz of PR8_2 is
+      signal contador: std_logic_vector (25 downto 0);
+begin
+    divisor_frecuencia: process (reset,clk) 
+begin
+        if (reset = '1') then
+            out1Hz <= '0';
+            contador <= (others => '0');
+        elsif rising_edge(clk) then
+            if (contador = x"2FAF07F")then    --Para un clock de 1Hz
+               contador <= (others => '0');
+                out1Hz <= NOT out1Hz;                
+            else
+                contador <= contador+1;
+            end if;
+        end if;
+    end process;
+end clk1Hz;
+
+***************************TESTBENCH DEL clk1Hz******************************************************
+
+library IEEE;
+use IEEE.Std_logic_1164.all;
+use IEEE.Numeric_Std.all;
+
+entity PR8_2_tb is
+end;
+
+architecture bench of PR8_2_tb is
+
+  component PR8_2
+      Port (
+          clk: in STD_LOGIC;
+          reset: in STD_LOGIC;
+          out1Hz : inout STD_LOGIC
+      );
+  end component;
+
+  signal clk: STD_LOGIC;
+  signal reset: STD_LOGIC;
+  signal out1Hz: STD_LOGIC ;
+
+  constant clock_period: time := 10 ns;
+  signal stop_the_clock: boolean;
+
+begin
+
+  uut: PR8_2 port map ( clk    => clk,
+                        reset  => reset,
+                        out1Hz => out1Hz );
+
+  stimulus: process
+  begin
+-- Put initialisation code here
+    reset <= '1'; wait for 100 ns;
+    reset <= '0';
+    
+    -- Put test bench stimulus code here
+
+    stop_the_clock <= false;
+    wait;
+  end process;
+
+  clocking: process
+  begin
+    while not stop_the_clock loop
+      clk <= '0', '1' after clock_period / 2;
+      wait for clock_period;
+    end loop;
+    wait;
+  end process;
+
+end;
+******************ARCHIVO FUENTE DEL ContadorGray de 4 bits*******************************************************
+library ieee;
+use ieee.std_logic_1164.all;
+--use ieee.std_logic_arith.all;
+use ieee.std_logic_unsigned.all;
+
+entity gray_counter is
+port(clk: in std_logic;
+   rst: in std_logic;
+  gray_code: out std_logic_vector (3 downto 0));
+end gray_counter;
+
+architecture FSM_1 of gray_counter is
+signal count : std_logic_vector(3 downto 0) := "0000";
+begin
+ process(clk)
+ begin
+  if (rst='1') then
+   count <= "0000";
+  elsif (rising_edge(clk)) then
+   count <= count + 1";
+  end if;
+ end process;
+    gray_code <= count xor ('0' & count(3 downto 1));
+end FSM_1;
+
+************TESTBENCH DEL gray_counter*************************
+
+library IEEE;
+use IEEE.Std_logic_1164.all;
+use IEEE.Numeric_Std.all;
+
+entity gray_counter_tb is
+end;
+
+architecture bench of gray_counter_tb is
+
+  component gray_counter
+  port(clk: in std_logic;
+     rst: in std_logic;
+    gray_code: out std_logic_vector (3 downto 0));
+  end component;
+
+  signal clk: std_logic;
+  signal rst: std_logic;
+  signal gray_code: std_logic_vector (3 downto 0);
+
+  constant clock_period: time := 10 ns;
+  signal stop_the_clock: boolean;
+
+begin
+
+  uut: gray_counter port map ( clk       => clk,
+                               rst       => rst,
+                               gray_code => gray_code );
+
+  stimulus: process
+  begin
+
+    -- Put initialisation code here  
+rst <= '1'; wait for 50ns; 
+
+    -- Put test bench stimulus code here
+ rst <='0';  
+    wait;
+    stop_the_clock <= True;
+    wait;
+  end process;
+
+  clocking: process
+  begin
+    while not stop_the_clock loop
+      clk <= '0', '1' after clock_period / 2;
+      wait for clock_period;
+    end loop;
+    wait;
+  end process;
+  end;
+
+*******************************************************************CODIGO INSTANCIADO***************************************************************************************
+		
+
+
+
