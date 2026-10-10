@@ -1,0 +1,65 @@
+************************************SOURCE FILE************************************************
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
+
+entity ER10_1 is
+
+port (Clr, clock : in std_logic;
+Q : out std_logic_vector(3 downto 0));
+end ER10_1;
+
+architecture archi of ER10_1 is
+signal tmp: std_logic_vector(3 downto 0);
+begin
+process (clock)
+begin
+    if (Clock'event and Clock='0') then
+        if (clr='0') then
+            tmp <= "0000";
+    else
+            tmp <= tmp + 1;
+end if;
+end if;
+end process;
+Q <= tmp;
+end archi; 
+
+***************************************************CLK_1HZ*************************************************************************
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity clk1Hz is
+Port (
+clk100MHz: in STD_LOGIC;
+rst : in STD_LOGIC;
+clk1Hz : out STD_LOGIC
+);
+end clk1Hz;
+
+architecture Behavioral of clk1Hz is
+signal clkout: std_logic;
+signal counter: integer range 0 to 49999999 := 0;
+
+begin
+divfreq: process (rst, clk100MHz) begin
+if (rst = '1') then
+    clkout <= '0';
+    counter <= 0;
+elsif rising_edge(clk100MHz) then
+    if (counter = 49999999) then
+    clkout <= NOT(clkout);
+    counter <= 0;
+else
+    counter <= counter+1;
+end if;
+end if;
+end process;
+clk1Hz <= clkout;
+end Behavioral;
+
+
+
