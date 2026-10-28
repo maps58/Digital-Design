@@ -6,7 +6,6 @@ entity bin2bcd is
     Port ( b : in  STD_LOGIC_VECTOR (13 downto 0);
            p : out  STD_LOGIC_VECTOR (16 downto 0));
 end bin2bcd;
-
 architecture Behavioral of bin2bcd is
 
 begin
